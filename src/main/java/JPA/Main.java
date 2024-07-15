@@ -9,23 +9,43 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
 
-        Configuration cfg = new Configuration().configure("/hibernate.cfg.xml");
-        SessionFactory sf = cfg.buildSessionFactory();
+        SessionFactory sf = HibernateUtil.getSessionFactory();
         Session tmp_session = sf.openSession();
         tmp_session.beginTransaction();
 
         CategoriaDAO c = new CategoriaDAO();
 
-        Categoria tmp_categoria = Categoria.builder().
-                id(2).
+        Categoria tmp_cat = Categoria.builder().
+                id(1).
+                livros(new ArrayList<Livro>()).
                 nome("Clássicos").build();
 
+        CategoriaDAO.save(tmp_cat);
 
-        tmp_session.merge(tmp_categoria);
+        LivroDAO l = new LivroDAO();
+
+        Livro tmp_livro = Livro.builder().
+                isbn(123456789128L).
+                nome("As Crônicas de Nárnia").
+                categoria(CategoriaDAO.findById(1)).
+                quantidade(6).build();
+
+        Livro tmp_livro2 = Livro.builder().
+                isbn(123456789188L).
+                nome("O Senhor dos Aneis").
+                categoria(CategoriaDAO.findById(1)).
+                quantidade(2).build();
+
+        LivroDAO.save(tmp_livro);
+        LivroDAO.save(tmp_livro2);
+
         tmp_session.getTransaction().commit();
         tmp_session.close();
         sf.close();
@@ -33,24 +53,13 @@ public class Main {
 }
 
 /*
-public static void main(String[] args) {
-    Configuration cfg = new Configuration().configure("/hibernate.cfg.xml");
-    SessionFactory sf = cfg.buildSessionFactory();
-    Session tmp_session = sf.openSession();
-    tmp_session.beginTransaction();
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session tmp_session = sf.openSession();
+        tmp_session.beginTransaction();
+*/
+/*
+        tmp_session.getTransaction().commit();
+        tmp_session.close();
+        sf.close();
+*/
 
-    CategoriaDAO c = new CategoriaDAO();
-
-    Categoria tmp_categoria = Categoria.builder()
-            .id(2)
-            .nome("Lançamento")
-            .build();
-
-    // Use merge() em vez de persist()
-    tmp_session.merge(tmp_categoria);
-
-    tmp_session.getTransaction().commit();
-    tmp_session.close();
-    sf.close();
-}
- */

@@ -2,25 +2,18 @@ package JPA.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigInteger;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 
 public class Livro {
     @Id
     @Column(name = "isbn", nullable = false , unique = true ,length = 13)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long isbn;
-    /*
-    ALTER TABLE Livro
-    ALTER COLUMN isbn TYPE bigint USING isbn::bigint;
-    */
 
     @Column(length = 50 , nullable = false)
     private String nome;
@@ -32,12 +25,15 @@ public class Livro {
     @Column(nullable = false)
     private Integer quantidade;
 
+    //Construtor Simples
     public Livro(String nome) {
         this.nome = nome;
+    };
+    // ToString
+    @Override
+    public String toString() {
+        return "Livro{" + "isbn=" + isbn + ", nome=" + nome +
+        ", categoria=" + categoria + ", quantidade=" + quantidade +'}';
     }
 }
 
-/*
-@ToString.Exclude
-private Double salario;
-*/

@@ -1,7 +1,6 @@
 package JPA.DAO;
 
 import JPA.Model.Categoria;
-import JPA.Model.Livro;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,9 +9,9 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class CategoriaDAO {
-    private SessionFactory local_factory = HibernateUtil.getSessionFactory();
+    private static SessionFactory local_factory = HibernateUtil.getSessionFactory();
 
-    public List<Categoria> findAll() {
+    public static List<Categoria> findAll() {
         try (Session tmp_session = local_factory.openSession()) {
             return tmp_session.createQuery("from Categoria ").getResultList();
         } catch (Exception e) {
@@ -21,11 +20,11 @@ public class CategoriaDAO {
         }
     }
 
-    public void save(Categoria categoria_parametro) {
+    public static void save(Categoria categoria_parametro) {
         Transaction transaction = null;
         try (Session tmp_session = local_factory.openSession()) {
             transaction = tmp_session.beginTransaction();
-            tmp_session.persist(categoria_parametro);
+            tmp_session.merge(categoria_parametro);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -36,7 +35,7 @@ public class CategoriaDAO {
         }
     }
 
-    public void delete(Categoria categoria_parametro) {
+    public static void delete(Categoria categoria_parametro) {
         Transaction transaction = null;
         try (Session tmp_session = local_factory.openSession()) {
             transaction = tmp_session.beginTransaction();
@@ -51,7 +50,7 @@ public class CategoriaDAO {
         }
     }
 
-    public Categoria findById(int id) {
+    public static Categoria findById(int id) {
         try (Session tmp_session = local_factory.openSession()) {
             return tmp_session.get(Categoria.class, id);
         } catch (Exception e) {
@@ -60,7 +59,7 @@ public class CategoriaDAO {
         }
     }
 
-    public void update(Categoria categoria_parametro) {
+    public static void update(Categoria categoria_parametro) {
         Transaction transaction = null;
         try (Session tmp_session = local_factory.openSession()) {
             transaction = tmp_session.beginTransaction();

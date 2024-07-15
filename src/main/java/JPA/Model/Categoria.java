@@ -9,7 +9,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 
 public class Categoria {
@@ -19,13 +18,20 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome", length = 50)
+    @Column(name = "nome", length = 50 , nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "categoria")
+    @Column(name = "categoria" , nullable = true)
+    @OneToMany(mappedBy = "categoria" )
     private List<Livro> livros;
 
+    // Construtor Simples
     public Categoria(String nome) {
         this.nome = nome;
+    }
+    // ToString
+    @Override
+    public String toString() {
+        return "Categoria{" + "id=" + id + ", nome=" + nome + '}';
     }
 }

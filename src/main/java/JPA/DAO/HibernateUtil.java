@@ -4,9 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    /*Cria uma nova SessionFactory. Essa SessionFactory será criada somente uma vez, na incialização do nosso programa.
-    Após o método getSessionFactory() passará a factory para que as DAOs, façam uso dessa mesma SessionFactory para
-    fazer buscar e inserções no banco de dados.*/
+    /*Session Factory é a configuração necessária para abrir as Sessions e Transactions*/
     private static SessionFactory sessionFactory = buildSessionFactory();
 
     /*Cria uma nova Configuration, com base nas informações do hibernate.cfg.xml*/
@@ -17,5 +15,7 @@ public class HibernateUtil {
             throw new ExceptionInInitializerError("Erro ao configurar o Hibernate" + e);
         }
     }
-    public static SessionFactory getSessionFactory() {return sessionFactory;}
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 }

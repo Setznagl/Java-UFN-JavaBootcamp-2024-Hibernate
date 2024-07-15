@@ -9,9 +9,9 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class LivroDAO {
-    private SessionFactory local_factory = HibernateUtil.getSessionFactory();
+    private static SessionFactory local_factory = HibernateUtil.getSessionFactory();
 
-    public List<Livro> findAll() {
+    public static List<Livro> findAll() {
         try (Session tmp_session = local_factory.openSession()) {
             return tmp_session.createQuery("from Livro ").getResultList();
         } catch (Exception e) {
@@ -20,11 +20,11 @@ public class LivroDAO {
         }
     }
 
-    public void save(Livro livro_parametro) {
+    public static void save(Livro livro_parametro) {
         Transaction transaction = null;
         try (Session tmp_session = local_factory.openSession()) {
             transaction = tmp_session.beginTransaction();
-            tmp_session.persist(livro_parametro);
+            tmp_session.merge(livro_parametro);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -35,7 +35,7 @@ public class LivroDAO {
         }
     }
 
-    public void delete(Livro livro) {
+    public static void delete(Livro livro) {
         Transaction transaction = null;
         try (Session tmp_session = local_factory.openSession()) {
             transaction = tmp_session.beginTransaction();
@@ -50,7 +50,7 @@ public class LivroDAO {
         }
     }
 
-    public Livro findById(int id) {
+    public static Livro findById(int id) {
         try (Session tmp_session = local_factory.openSession()) {
             return tmp_session.get(Livro.class, id);
         } catch (Exception e) {
@@ -59,7 +59,7 @@ public class LivroDAO {
         }
     }
 
-    public void update(Livro livro) {
+    public static void update(Livro livro) {
         Transaction transaction = null;
         try (Session tmp_session = local_factory.openSession()) {
             transaction = tmp_session.beginTransaction();
