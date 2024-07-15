@@ -4,7 +4,7 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Configurações do PostgreSQL -->
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/projeto1</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">204060</property>
 
@@ -15,6 +15,7 @@
         <property name="hibernate.highlight_sql">"true"</property>
 
         <!-- Mapeamento de Classe -->
-        <mapping class="JPA.Model.Ator"/>
+        <mapping class="JPA.Model.Livro"/>
+        <mapping class="JPA.Model.Categoria"/>
     </session-factory>
 </hibernate-configuration>
