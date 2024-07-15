@@ -21,8 +21,8 @@ public class Main {
         CategoriaDAO c = new CategoriaDAO();
 
         Categoria tmp_categoria = Categoria.builder().
-                id(1).
-                nome("Lançamento").build();
+                id(2).
+                nome("Clássicos").build();
 
 
         tmp_session.merge(tmp_categoria);
