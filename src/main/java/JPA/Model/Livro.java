@@ -11,18 +11,17 @@ import lombok.*;
 
 public class Livro {
     @Id
-    @Column(name = "isbn", nullable = false , unique = true ,length = 13)
+    @Column(name = "ISBN", nullable = false , unique = true ,length = 13)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long isbn;
 
-    @Column(length = 50 , nullable = false)
+    @Column(name = "Nome", length = 50 , nullable = false)
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoria_do_livro")
-    private Categoria categoria;
+    @Column(name = "Categoria", length = 50, nullable = false)
+    private String categoria;
 
-    @Column(nullable = false)
+    @Column(name = "Quantidade", nullable = false)
     private Integer quantidade;
 
     //Construtor Simples
