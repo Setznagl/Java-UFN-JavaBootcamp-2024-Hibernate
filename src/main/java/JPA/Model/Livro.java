@@ -11,14 +11,14 @@ import lombok.*;
 
 public class Livro {
     @Id
-    @Column(name = "ISBN", nullable = false , unique = true ,length = 13)
+    @Column(name = "ISBN", nullable = false , unique = true ,length = 14)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long isbn;
 
     @Column(name = "Nome", length = 50 , nullable = false)
     private String nome;
 
-    @Column(name = "Categoria", length = 50, nullable = false)
+    @Column(name = "Categoria", length = 50, nullable = true)
     private String categoria;
 
     @Column(name = "Quantidade", nullable = false)

@@ -16,6 +16,5 @@
 
         <!-- Mapeamento de Classe -->
         <mapping class="JPA.Model.Livro"/>
-        <mapping class="JPA.Model.Categoria"/>
     </session-factory>
 </hibernate-configuration>

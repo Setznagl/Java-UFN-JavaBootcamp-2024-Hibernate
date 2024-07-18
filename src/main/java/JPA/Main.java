@@ -14,7 +14,13 @@ public class Main {
         Session tmp_session = sf.openSession();
         tmp_session.beginTransaction();
 
-        
+        LivroDAO l = new LivroDAO();
+        Livro tmp_livro = Livro.builder().
+                isbn(1234567890123L).
+                nome("Crime e Castigo").
+                categoria("Clássico").
+                quantidade(5).build();
+        LivroDAO.save(tmp_livro);
 
         tmp_session.getTransaction().commit();
         tmp_session.close();
